@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find Nearby Grocery Stores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛒 Find Grocery Stores Near You</h2>
+  <button onclick="findGroceryStores()">Show on Google Maps</button>
+
+  <script>
+    function findGroceryStores() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const query = `https://www.google.com/maps/search/grocery+stores/@${lat},${lng},15z`;
+          window.open(query, '_blank');
+        }, () => {
+          alert("⚠️ Location access denied.");
+        });
+      } else {
+        alert("❌ Your browser does not support geolocation.");
+      }
+    }
+  </script>
+
+</body>
+</html>
